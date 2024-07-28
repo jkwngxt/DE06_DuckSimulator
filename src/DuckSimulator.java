@@ -28,22 +28,20 @@ public class DuckSimulator {
         System.out.println("Simulate Part 2 Decorator");
         Quackable mallardDuck2 = new QuackCounter(new MallardDuck());
         Quackable rubberDuck2 = new QuackCounter(new RubberDuck());
-
-        Quackable redheadDuck2 = new PoliteQuacker(new RedheadDuck());
-        Quackable duckCall2 = new PoliteQuacker(new DuckCall());
-        Quackable pigeon2 = new PoliteQuacker(new PigeonAdapter(new Pigeon()));
-        Quackable goose2 = new PoliteQuacker(new GooseAdapter(new Goose()));
-
+        Quackable redheadDuck2 = new QuackCounter(new RedheadDuck());
+        System.out.println("Count duck: " + QuackCounter.getNumOfQuack());
         simulate(mallardDuck2);
         simulate(redheadDuck2);
-
         simulate(rubberDuck2);
+        System.out.println();
+
+        Quackable duckCall2 = new PoliteCounter(new PoliteQuacker(new DuckCall()));
+        Quackable pigeon2 = new PoliteCounter(new PoliteQuacker(new PigeonAdapter(new Pigeon())));
+        Quackable goose2 = new PoliteCounter(new PoliteQuacker(new GooseAdapter(new Goose())));
         simulate(duckCall2);
         simulate(pigeon2);
         simulate(goose2);
-
-        System.out.println("Count duck: " + QuackCounter.getNumOfQuack());
-        System.out.println("Count Polite Duck: " + PoliteQuacker.getNumOfPoliteQuack());
+        System.out.println("Count Polite: " + PoliteCounter.getNumOfQuack());
         System.out.println();
 
 
@@ -72,18 +70,17 @@ public class DuckSimulator {
         System.out.println("Count duck: " + QuackCounter.getNumOfQuack());
         System.out.println();
 
-        AbstractDuckFactory politeAndCounterFactory = new PoliteAndCounterFactory();
+        AbstractDuckFactory politeAndCounterFactory = new PoliteCounterFactory();
         Quackable duckCall3CP = politeAndCounterFactory.createDuckCall();
         Quackable mallardDuck3CP = politeAndCounterFactory.createMallardDuck();
         Quackable redheadDuck3CP = politeAndCounterFactory.createRubberDuck();
         Quackable rubberDuck3CP = politeAndCounterFactory.createRubberDuck();
-        System.out.println("Simulate Part 3 : Polite and Counter Factory");
+        System.out.println("Simulate Part 3 : Polite Counter Factory");
         simulate(duckCall3CP);
         simulate(mallardDuck3CP);
         simulate(redheadDuck3CP);
         simulate(rubberDuck3CP);
-        System.out.println("Count duck: " + QuackCounter.getNumOfQuack());
-        System.out.println("Count Polite Duck: " + PoliteQuacker.getNumOfPoliteQuack());
+        System.out.println("Count Polite Duck: " + PoliteCounter.getNumOfQuack());
         System.out.println();
 
         System.out.println("Simulate Part 4 Composition");
